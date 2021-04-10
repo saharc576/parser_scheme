@@ -338,6 +338,6 @@ export const unparseL31 = (exp: Program | Exp): string =>
 
     const cl = `(class ((first (lambda () a)) (second (lambda () b)) (sum (lambda () (+ a b)))))`
     // const i = 'if (a)'
-    const parsed = parseL31CExp(cl);
-    console.log("%j" , parsed);
+    // const parsed = parseL31CExp(cl);
+    // console.log("%j" , parsed);
     // const unparsed = unparseL31(parsed);
