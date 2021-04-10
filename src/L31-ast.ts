@@ -255,9 +255,8 @@ const parseClassExp = (fields: Sexp, methods: Sexp[]): Result<ClassExp> => {
         return makeFailure('Malformed bindings in "class" expression');
     }
 
-    const methodName = map(b => b[0], methods);                                                                             // get binding's name
-    const bodyResult = mapResult(method => parseL31CExp(second(method)), methods);                                          // recursivley parse method's body (for each method) and make Result<CExp[]>
-    const bindingsResult = bind(bodyResult, (methodBody: CExp[]) => makeOk(zipWith(makeBinding, methodName, methodBody))); // make binding from method's name and bode - for each method -- eventually Result<binding>
+    const bodyResult = mapResult(method => parseL31CExp(method), methods);                                          // recursivley parse method's body (for each method) and make Result<CExp[]>
+    const bindingsResult = bind(bodyResult, (methodBody: CExp[]) => makeOk(zipWith(makeBinding, [""], methodBody))); // make binding from method's name and bode - for each method -- eventually Result<binding>
     const fieldsResult = mapResult(field => makeOk(makeVarDecl(field)), fields);
 
     return safe2((fields: VarDecl[], methods: Binding[]) => makeOk(makeClassExp(fields, methods)))(fieldsResult, bindingsResult)
@@ -317,7 +316,7 @@ const unparseLetExp = (le: LetExp) : string =>
     `(let (${map((b: Binding) => `(${b.var.var} ${unparseL31(b.val)})`, le.bindings).join(" ")}) ${unparseLExps(le.body)})`
 
 const unparseClassExp = (ce: ClassExp) : string => 
-    `(class (${map((vd: VarDecl) => `${vd.var}`, ce.fields).join(" ")}) (${map((b: Binding) => `(${b.var} ${unparseL31(b.val)})`, ce.methods).join("")}))`
+    `(class (${map((vd: VarDecl) => `${vd.var}`, ce.fields).join(" ")})${map((b: Binding) => `${b.var.var} ${unparseL31(b.val)}`, ce.methods).join(" ")})`
 
 export const unparseL31 = (exp: Program | Exp): string =>
     isBoolExp(exp) ? valueToString(exp.val) :
