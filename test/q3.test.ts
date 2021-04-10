@@ -5,13 +5,13 @@ import { makeOk, bind, isFailure, makeFailure } from '../shared/result';
 import { parse as p } from "../shared/parser";
 
 describe('Q3 Tests', () => {
-    //  it('test parse/unparse class', () => {
-    //       expect(bind(bind(p(`(class (a b) ((first (lambda () a)) (second (lambda () b)) (sum (lambda () (+ a b)))))`),parseL31Exp), x=>makeOk(unparseL31(x)))).to.deep.equal(makeOk(`(class (a b) ((first (lambda () a)) (second (lambda () b)) (sum (lambda () (+ a b)))))`));
-    //      });
+     it('test parse/unparse class', () => {
+          expect(bind(bind(p(`(class (a b) ((first (lambda () a)) (second (lambda () b)) (sum (lambda () (+ a b)))))`),parseL31Exp), x=>makeOk(unparseL31(x)))).to.deep.equal(makeOk(`(class (a b) ((first (lambda () a)) (second (lambda () b)) (sum (lambda () (+ a b)))))`));
+         });
 
-    //  it('test parse wrong class', () => {
-    //       expect(bind(p(`(class ((first (lambda () a)) (second (lambda () b)) (sum (lambda () (+ a b)))))`),parseL31Exp)).is.satisfy(isFailure);
-    //  });
+     it('test parse wrong class', () => {
+          expect(bind(p(`(class ((first (lambda () a)) (second (lambda () b)) (sum (lambda () (+ a b)))))`),parseL31Exp)).is.satisfy(isFailure);
+     });
 
 
     //  it('test parse/unparse program', () => {
