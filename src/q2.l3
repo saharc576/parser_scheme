@@ -1,0 +1,61 @@
+(define empty?
+   (lambda (lst)
+      (eq? lst '())))
+
+(define append
+  (lambda (l1 l2)
+    (if (empty? l1)
+        l2
+        (cons (car l1) (append (cdr l1) l2))
+    )
+  )
+)
+
+(define reverse 
+  (lambda (lst)
+    (if (empty? lst)
+      '()
+      (append (reverse (cdr lst)) (list(car lst)) )
+    )    
+  )
+)  
+
+
+(define duplicate-items
+  (lambda (lst dup-count)
+    (if (empty? lst)
+        '()
+        (append (dup-item (list (car lst)) (car dup-count))(duplicate-items (cdr lst) (append (cdr dup-count) (list (car dup-count))))))))
+ 
+ (define dup-item
+  (lambda (lst num)
+    (if (= num 0)
+        '()
+        (append lst (dup-item (list (car lst)) (- num 1))))))
+
+(define payment
+  (lambda (sum coins)
+    (if (empty? coins)
+        (if (= sum 0)
+            1
+            0)
+        (if (< sum 0)
+            0
+            (if (= sum 0)
+                1
+                (+ (payment sum (rmv-coins (car coins) coins)) (payment (- sum (car coins)) (cdr coins))))))))
+
+(define rmv-coins
+  (lambda (coin coins)
+    (if (empty? coins)
+        '()
+        (if (= coin (car coins))
+            (rmv-coins coin (cdr coins))
+            (append (list (car coins)) (rmv-coins coin (cdr coins)))))))
+
+        
+(define compose-n
+  (lambda (f n)
+    (if (= n 1)
+        (lambda (x) (f x))
+        (lambda (x) (f ((compose-n f (- n 1) ) x))))))
