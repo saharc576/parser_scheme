@@ -255,7 +255,7 @@ const parseClassExp = (fields: Sexp, methods: Sexp[]): Result<ClassExp> => {
         return makeFailure('Malformed bindings in "class" expression');
     }
 
-    const methodRes = mapResult(method => parseL31CExp(method), methods);  // recursivley parse method (for each method) and make Result<CExp[]>
+    const methodRes = mapResult(method => parseL31CExp(method), methods);   // recursivley parse method (for each method) and make Result<CExp[]>
     const bindingsResult = bind(methodRes, (method: CExp[]) => makeOk(zipWith(makeBinding, [""], method))); // make binding from method (contains name and body) - for each method -- eventually Result<binding>
     const fieldsResult = mapResult(field => makeOk(makeVarDecl(field)), fields);
 
@@ -331,5 +331,5 @@ export const unparseL31 = (exp: Program | Exp): string =>
     isLetExp(exp) ? unparseLetExp(exp) :
     isDefineExp(exp) ? `(define ${exp.var.var} ${unparseL31(exp.val)})` :
     isProgram(exp) ? `(L31 ${unparseLExps(exp.exps)})` :
-    isClassExp(exp) ? unparseClassExp(exp): 
+    isClassExp(exp) ? unparseClassExp(exp):
     exp;
