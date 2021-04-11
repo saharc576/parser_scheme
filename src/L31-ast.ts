@@ -255,8 +255,8 @@ const parseClassExp = (fields: Sexp, methods: Sexp[]): Result<ClassExp> => {
         return makeFailure('Malformed bindings in "class" expression');
     }
 
-    const bodyResult = mapResult(method => parseL31CExp(method), methods);                                          // recursivley parse method's body (for each method) and make Result<CExp[]>
-    const bindingsResult = bind(bodyResult, (methodBody: CExp[]) => makeOk(zipWith(makeBinding, [""], methodBody))); // make binding from method's name and bode - for each method -- eventually Result<binding>
+    const methodRes = mapResult(method => parseL31CExp(method), methods);  // recursivley parse method (for each method) and make Result<CExp[]>
+    const bindingsResult = bind(methodRes, (method: CExp[]) => makeOk(zipWith(makeBinding, [""], method))); // make binding from method (contains name and body) - for each method -- eventually Result<binding>
     const fieldsResult = mapResult(field => makeOk(makeVarDecl(field)), fields);
 
     return safe2((fields: VarDecl[], methods: Binding[]) => makeOk(makeClassExp(fields, methods)))(fieldsResult, bindingsResult)
