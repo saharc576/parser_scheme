@@ -1,2 +1,0 @@
-# PPL
-BGU course
