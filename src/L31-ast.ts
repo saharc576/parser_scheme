@@ -247,7 +247,6 @@ const parseLetExp = (bindings: Sexp, body: Sexp[]): Result<LetExp> => {
 }
 
 const parseClassExp = (fields: Sexp, methods: Sexp[]): Result<ClassExp> => {
-    
     if (!(isArray(fields) && allT(isString, fields))) {
         return makeFailure('Invalid fields for ClassExp');
     }
@@ -256,9 +255,8 @@ const parseClassExp = (fields: Sexp, methods: Sexp[]): Result<ClassExp> => {
         return makeFailure('Malformed bindings in "class" expression');
     }
 
-    const methodName = map(b => b[0], methods); // get binding's name
-    const bodyResult = mapResult(method => parseL31CExp(second(method)), methods);  // recursivley parse method's body (for each method) and make Result<CExp[]>
-    const bindingsResult = bind(bodyResult, (methodBody: CExp[]) => makeOk(zipWith(makeBinding, methodName, methodBody))); // make binding from method's name and bode - for each method -- eventually Result<binding>
+    const methodRes = mapResult(method => parseL31CExp(method), methods);  // recursivley parse method (for each method) and make Result<CExp[]>
+    const bindingsResult = bind(methodRes, (method: CExp[]) => makeOk(zipWith(makeBinding, [""], method))); // make binding from method (contains name and body) - for each method -- eventually Result<binding>
     const fieldsResult = mapResult(field => makeOk(makeVarDecl(field)), fields);
 
     return safe2((fields: VarDecl[], methods: Binding[]) => makeOk(makeClassExp(fields, methods)))(fieldsResult, bindingsResult)
@@ -317,6 +315,9 @@ const unparseProcExp = (pe: ProcExp): string =>
 const unparseLetExp = (le: LetExp) : string => 
     `(let (${map((b: Binding) => `(${b.var.var} ${unparseL31(b.val)})`, le.bindings).join(" ")}) ${unparseLExps(le.body)})`
 
+const unparseClassExp = (ce: ClassExp) : string => 
+    `(class (${map((vd: VarDecl) => `${vd.var}`, ce.fields).join(" ")})${map((b: Binding) => `${b.var.var} ${unparseL31(b.val)}`, ce.methods).join(" ")})`
+
 export const unparseL31 = (exp: Program | Exp): string =>
     isBoolExp(exp) ? valueToString(exp.val) :
     isNumExp(exp) ? valueToString(exp.val) :
@@ -330,6 +331,5 @@ export const unparseL31 = (exp: Program | Exp): string =>
     isLetExp(exp) ? unparseLetExp(exp) :
     isDefineExp(exp) ? `(define ${exp.var.var} ${unparseL31(exp.val)})` :
     isProgram(exp) ? `(L31 ${unparseLExps(exp.exps)})` :
-    isClassExp(exp) ? `(class w)`:                   // ==================== only for compilation
+    isClassExp(exp) ? unparseClassExp(exp): 
     exp;
-
