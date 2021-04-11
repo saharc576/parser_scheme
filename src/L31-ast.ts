@@ -333,10 +333,3 @@ export const unparseL31 = (exp: Program | Exp): string =>
     isProgram(exp) ? `(L31 ${unparseLExps(exp.exps)})` :
     isClassExp(exp) ? unparseClassExp(exp): 
     exp;
-
-
-    const cl = `(class ((first (lambda () a)) (second (lambda () b)) (sum (lambda () (+ a b)))))`
-    // const i = 'if (a)'
-    // const parsed = parseL31CExp(cl);
-    // console.log("%j" , parsed);
-    // const unparsed = unparseL31(parsed);
