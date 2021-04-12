@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="19dfa446-0c5f-4bcf-8bce-0a4d421ca312" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../imp/L3-ast.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../imp/L3-env.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../imp/L3-eval.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../imp/L3-value.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../imp/evalPrimitive.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../imp/substitute.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shared/box.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shared/list.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shared/optional.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shared/parser.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shared/result.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shared/s-expression.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shared/type-predicates.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/L31-ast.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/q2.l3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/q3.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/q4.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/q3.test.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/q4.test.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/‏‏q2.test.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tsconfig.json" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1r4JRq75AcTo1nC6WngZivR6h17" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="19dfa446-0c5f-4bcf-8bce-0a4d421ca312" name="Default Changelist" comment="" />
+      <created>1618229428853</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1618229428853</updated>
+      <workItem from="1618229430210" duration="5000" />
+    </task>
+    <servers />
+  </component>
+</project>
