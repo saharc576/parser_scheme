@@ -39,15 +39,15 @@ export const L31ExpToL3 = (exp: Exp): Result<Exp> =>
     L31CExpToL3(exp);
 
 export const L31CExpToL3 = (exp: CExp): Result<CExp> => 
-    isNumExp(exp) ? makeOk(exp) :
+    isNumExp(exp) ? makeOk(exp)  :
     isBoolExp(exp) ? makeOk(exp) :
-    isPrimOp(exp) ? makeOk(exp) :
-    isVarRef(exp) ? makeOk(exp) :
+    isPrimOp(exp) ? makeOk(exp)  :
+    isVarRef(exp) ? makeOk(exp)  :
+    isLitExp(exp) ? makeOk(exp)  :
     isAppExp(exp) ? safe2((rator: CExp, rands: CExp[]) => makeOk(makeAppExp(rator, rands)))
                         (L31CExpToL3(exp.rator), mapResult(L31CExpToL3, exp.rands)) :
     isIfExp(exp) ? safe3((test: CExp, then: CExp, alt: CExp) => makeOk(makeIfExp(test, then, alt)))
                     (L31CExpToL3(exp.test), L31CExpToL3(exp.then), L31CExpToL3(exp.alt)) :
-    isLitExp(exp) ? makeOk(makeVarRef(exp.val.toString())):
     isProcExp(exp) ? bind(mapResult(L31CExpToL3, exp.body), (body: CExp[]) => makeOk(makeProcExp(exp.args, body))) :
     isLetExp(exp) ? safe2((bindings: Binding[], body: CExp[]) => makeOk(makeLetExp(bindings, body)))
                         (bindingHandler(exp.bindings), mapResult(x => L31CExpToL3(x), exp.body)):
