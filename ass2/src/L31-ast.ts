@@ -246,7 +246,7 @@ const parseLetExp = (bindings: Sexp, body: Sexp[]): Result<LetExp> => {
         (bindingsResult, mapResult(parseL31CExp, body));
 }
 
-const parseClassExp = (fields: Sexp, methods: Sexp[]): Result<ClassExp> => {
+const parseClassExp = (fields: Sexp, methods: Sexp): Result<ClassExp> => {
     if (!(isArray(fields) && allT(isString, fields))) {
         return makeFailure('Invalid fields for ClassExp');
     }
@@ -334,3 +334,4 @@ export const unparseL31 = (exp: Program | Exp): string =>
     isProgram(exp) ? `(L31 ${unparseLExps(exp.exps)})` :
     isClassExp(exp) ? unparseClassExp(exp):
     exp;
+
