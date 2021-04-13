@@ -53,7 +53,7 @@ export const L31CExpToL3 = (exp: CExp): Result<CExp> =>
                         (bindingHandler(exp.bindings), mapResult(x => L31CExpToL3(x), exp.body)):
     isClassExp(exp) ? safe2((fields: VarDecl[], methods: Binding[]) => makeOk(class2proc((makeClassExp(fields, methods)))))
                         (varDeclHandler(exp.fields), bindingHandler(exp.methods)):
-    makeFailure(`Unexpected CExp: ${exp.tag}`);
+    makeFailure(`Unexpected CExp: ${exp}`);
 
     const bindingHandler = (bindings: Binding[]): Result<Binding[]> => {
 
@@ -66,3 +66,11 @@ export const L31CExpToL3 = (exp: CExp): Result<CExp> =>
     const varDeclHandler = (vars: VarDecl[]): Result<VarDecl[]> => 
          mapResult(v => makeOk(v) , vars)
     
+
+
+         /*
+         
+            (if (> x 3) 4 5) ⇒ (4 if (x > 3) else 5)
+            
+         
+         */
