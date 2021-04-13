@@ -24,6 +24,12 @@ const processProgram = (exps: Exp[]): Result<string>  =>
     bind(mapResult(l2ToPython, exps),
          exps => makeOk(`${exps.join("\n")}`));
 
+/* 
+    function handles 3 cases - all are primOps:
+        1. it is a "not" operator
+        2. it is one of the primitive operators [["number?","boolean?"],["eq?","=", "and", "or", ">", "<"], ["/", "-", "*", "+"]]
+        3. it is a function which applied on parameters
+*/         
 const processAppExp = (exp: AppExp): Result<string>  => 
     isPrimOp(exp.rator) && exp.rator.op === "not" ? bind(mapResult(l2ToPython, exp.rands), rands => makeOk(`(not ${rands[0]})`)) :
     isPrimOp(exp.rator) ? (
